@@ -1,2 +1,1 @@
 pytest>=8,<10
-libreria_inventada_12345
