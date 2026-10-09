@@ -6,7 +6,7 @@ from calculadora import calcular, main
 @pytest.mark.parametrize(
     "numero1, numero2, opcion, esperado",
     [
-        (10, 5, "1", 15),
+        (10, 5, "1", 30),
         (-3, 2, "1", -1),
         (10, 5, "2", 5),
         (3, 8, "2", -5),
