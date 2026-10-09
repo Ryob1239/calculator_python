@@ -1,0 +1,43 @@
+name: Pruebas de calculadora con Pytest
+
+on:
+  push:
+    branches: [main]
+
+  pull_request:
+    branches: [main]
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pruebas:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Descargar el repositorio
+        uses: actions/checkout@v7
+
+      - name: Configurar Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+
+      - name: Ejecutar pruebas con Pytest
+        run: python -m pytest -v --junitxml=reportes/pytest.xml
+
+      - name: Guardar reporte de pruebas
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reporte-pytest
+          path: reportes/pytest.xml
+          if-no-files-found: warn
