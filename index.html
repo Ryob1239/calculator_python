@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0c1325">
+  <meta name="description" content="Calculadora de cuatro operaciones con pruebas interactivas, lista para GitHub Pages.">
+  <title>Calculadora | Pruebas con GitHub Pages</title>
+  <link rel="stylesheet" href="./assets/css/styles.css">
+  <script src="./assets/js/calculadora.js" defer></script>
+  <script src="./assets/js/app.js" defer></script>
+</head>
+<body>
+  <div class="site-shell">
+    <header class="site-header">
+      <a href="./" class="brand" aria-label="Ir al inicio de Calculadora">
+        <span class="brand-icon" aria-hidden="true">∑</span>
+        <span>calc<span class="brand-accent">.</span>dev</span>
+      </a>
+      <span class="header-pill"><span class="online-dot" aria-hidden="true"></span> Versión web · GitHub Pages</span>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <span class="eyebrow"><span class="eyebrow-mark" aria-hidden="true"></span> PROYECTO DE PRUEBAS</span>
+        <h1 id="hero-title">Calculadora <span>interactiva.</span></h1>
+        <p>Un proyecto en Python, ahora también en tu navegador. Realiza operaciones y ejecuta pruebas rápidas sin instalar nada.</p>
+      </section>
+
+      <div class="workspace">
+        <section class="card calculator-card" aria-labelledby="calc-title">
+          <div class="section-header">
+            <div>
+              <p class="section-kicker">OPERACIONES</p>
+              <h2 id="calc-title">Haz tus cálculos</h2>
+            </div>
+            <span class="section-icon" aria-hidden="true">±</span>
+          </div>
+
+          <form id="calculator-form" novalidate>
+            <div class="input-grid">
+              <label class="field" for="numero1">
+                <span>Primer número</span>
+                <input id="numero1" name="numero1" type="number" step="any" inputmode="decimal" placeholder="Ej. 25" autocomplete="off" required>
+              </label>
+              <label class="field" for="numero2">
+                <span>Segundo número</span>
+                <input id="numero2" name="numero2" type="number" step="any" inputmode="decimal" placeholder="Ej. 5" autocomplete="off" required>
+              </label>
+            </div>
+
+            <p class="micro-label" id="operations-label">SELECCIONA UNA OPERACIÓN</p>
+            <div class="operations" role="group" aria-labelledby="operations-label">
+              <button type="submit" data-op="1" class="operation-button"><span class="operation-symbol" aria-hidden="true">+</span><span>Sumar</span></button>
+              <button type="submit" data-op="2" class="operation-button"><span class="operation-symbol" aria-hidden="true">−</span><span>Restar</span></button>
+              <button type="submit" data-op="3" class="operation-button"><span class="operation-symbol" aria-hidden="true">×</span><span>Multiplicar</span></button>
+              <button type="submit" data-op="4" class="operation-button"><span class="operation-symbol" aria-hidden="true">÷</span><span>Dividir</span></button>
+            </div>
+
+            <div class="result-panel" id="result-panel" aria-live="polite" aria-atomic="true">
+              <span class="result-label">RESULTADO</span>
+              <span class="result-value" id="resultado">—</span>
+              <span class="result-expression" id="expresion">Introduce dos números y elige una operación.</span>
+            </div>
+            <button type="reset" class="clear-button" id="limpiar">↺ &nbsp; Limpiar calculadora</button>
+          </form>
+        </section>
+
+        <aside class="aside-column">
+          <section class="card tests-card" aria-labelledby="tests-title">
+            <div class="section-header">
+              <div>
+                <p class="section-kicker">VERIFICACIÓN</p>
+                <h2 id="tests-title">Pruebas rápidas</h2>
+              </div>
+              <span class="section-icon test-icon" aria-hidden="true">✓</span>
+            </div>
+            <p class="card-description">Comprueba las cuatro operaciones, números decimales, división entre cero y opciones inválidas.</p>
+            <button type="button" id="ejecutar-pruebas" class="run-button">▶ <span>Ejecutar pruebas</span></button>
+            <div class="tests-summary" id="tests-summary" role="status" aria-live="polite">Listas para ejecutar</div>
+            <ul class="tests-list" id="tests-list" aria-label="Resultados de las pruebas"></ul>
+            <p class="helper-note">Estas pruebas se ejecutan en tu navegador. El repositorio también usa Pytest y GitHub Actions.</p>
+          </section>
+
+          <section class="card history-card" aria-labelledby="history-title">
+            <div class="section-header history-header">
+              <div>
+                <p class="section-kicker">ACTIVIDAD</p>
+                <h2 id="history-title">Últimos cálculos</h2>
+              </div>
+              <span class="section-icon history-icon" aria-hidden="true">↗</span>
+            </div>
+            <p id="history-empty" class="empty-history">Tus operaciones aparecerán aquí.</p>
+            <ol id="history-list" class="history-list" aria-label="Historial de cálculos"></ol>
+          </section>
+        </aside>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <span>Calculadora · Python + JavaScript</span>
+      <span>Interfaz estática · Sin servidor ni base de datos</span>
+    </footer>
+  </div>
+</body>
+</html>
