@@ -11,8 +11,13 @@ permissions:
   contents: read
 
 jobs:
+
+  # ==========================================
+  # PRUEBAS DE PYTHON
+  # ==========================================
   pruebas:
     runs-on: ubuntu-latest
+
     steps:
       - name: Descargar el repositorio
         uses: actions/checkout@v6
@@ -38,8 +43,12 @@ jobs:
           path: reportes/pytest.xml
           if-no-files-found: warn
 
+  # ==========================================
+  # PRUEBAS DE JAVASCRIPT Y HTML
+  # ==========================================
   pruebas-web:
     runs-on: ubuntu-latest
+
     steps:
       - name: Descargar el repositorio
         uses: actions/checkout@v6
@@ -52,10 +61,14 @@ jobs:
       - name: Probar JavaScript y archivos web
         run: node --test tests/test_calculadora_web.cjs
 
+  # ==========================================
+  # PREPARAR GITHUB PAGES
+  # ==========================================
   preparar-pages:
     if: github.event_name != 'pull_request'
     needs: [pruebas, pruebas-web]
     runs-on: ubuntu-latest
+
     steps:
       - name: Descargar el repositorio
         uses: actions/checkout@v6
@@ -63,8 +76,16 @@ jobs:
       - name: Preparar sitio estático
         run: |
           mkdir -p _site
+
+          # Copiar archivo HTML principal
           cp index.html _site/index.html
-          cp -R assets _site/assets
+
+          # Copiar assets solamente si existe
+          if [ -d "assets" ]; then
+            cp -R assets _site/assets
+          fi
+
+          # Evitar procesamiento con Jekyll
           touch _site/.nojekyll
 
       - name: Configurar GitHub Pages
@@ -75,17 +96,23 @@ jobs:
         with:
           path: _site
 
+  # ==========================================
+  # PUBLICAR GITHUB PAGES
+  # ==========================================
   publicar-pages:
     if: github.event_name != 'pull_request'
     needs: preparar-pages
     runs-on: ubuntu-latest
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+
     permissions:
       contents: read
       pages: write
       id-token: write
+
     steps:
       - name: Publicar en GitHub Pages
         id: deployment
