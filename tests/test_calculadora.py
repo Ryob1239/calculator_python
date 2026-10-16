@@ -53,4 +53,4 @@ def test_menu_suma_y_salida(monkeypatch, capsys):
 
 # Prueba controlada para demostrar un fallo y su corrección en GitHub Actions.
 def test_suma_para_demostracion_cd():
-    assert calcular(10, 5, "1") == 100
+    assert calcular(10, 5, "1") == 15
